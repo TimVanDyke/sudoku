@@ -159,3 +159,12 @@ int blockAvailable(int board[9][9], int col, int row, int num) {
 	}
 	return 1;
 }
+
+void printBoard (int board[9][9]) {
+	for (int i = 0; i < 9; i++) {
+		for (int j = 0; j < 9; j++) {
+			std::cout << "[" << board[i][j] << "]";
+		}	
+		std::cout << std::endl;
+	}
+}
