@@ -16,7 +16,6 @@
  * References: TODO (update ref-v)
  *  David Baas and Santiago Quiroga- helped me figure out the 
  *   backtracking portion
-*
 ***********************************************************************/
 
 //Includes
@@ -29,16 +28,15 @@
 //Function Declarations
 bool solve(int board[9][9]);
 bool solve(int board[9][9], int row, int col);
-int checkRow(int board[9][9], int i);
-int checkCol(int board[9][9], int i);
 bool rowAvailable(int board[9][9], int row, int num);
-int checkBlock(int board[9][9], int blockNum);
-
 bool colAvailable(int board[9][9], int col, int num);
 bool blockAvailable(int board[9][9], int col, int row, int num);
-
 void printBoard (int board[9][9]);
 
+//These Methods were not used not used in the logic, so we did not comment them
+int checkRow(int board[9][9], int i);
+int checkCol(int board[9][9], int i);
+int checkBlock(int board[9][9], int blockNum);
 
 /***********************************************************************  
  * This method serves as the driver method for the program, giving main
@@ -59,8 +57,8 @@ bool solve (int board[9][9]) {
  * @return
  ***********************************************************************/
 bool solve (int board[9][9], int row, int col) {
-  std::cout << "next step" << std::endl;
-  printBoard(board);
+  //std::cout << "next step" << std::endl; //Testing**
+  //printBoard(board);  //Testing**
   //Base Case: finished state achieved
   if (row == 8 && col == 9) {
     std::cout << "-------FINISHED STATE ACHIEVED-------" << std::endl;
@@ -77,10 +75,13 @@ bool solve (int board[9][9], int row, int col) {
   //-----Checking Phase Begins-----
   //If current position is "empty" search for add
   if (board[row][col] == 0) {
-    std::cout << "got here" << std::endl;
-    int temp = checkRow(board, row);
+    //std::cout << "got here" << std::endl; //Testing**
+    //int temp = checkRow(board, row);
     //int temp = 1;
-    while (temp < 10) {
+    for(int temp = 1; temp < 10; temp++) {
+      //std::cout << "Temp: " << temp << std::endl;
+      //std::cout << "Row: " << row << std::endl;
+      //std::cout << "Col: " << col << std::endl;
       //Check if the temp works for the row, col, and block
       if (rowAvailable(board, row, temp) && 
           colAvailable(board, col, temp) && 
@@ -92,8 +93,8 @@ bool solve (int board[9][9], int row, int col) {
               return true;
             }
       }
-      else
-        temp++;
+      //else
+      //  temp++;
     }//EoW
     
   }
@@ -204,7 +205,7 @@ bool colAvailable(int board[9][9], int col, int num) {
 }
 //makes sure the num is available for the square
 // depricated: returns 0 for false, 1 for true;
-bool blockAvailable(int board[9][9], int col, int row, int num) {
+bool blockAvailable(int board[9][9], int row, int col, int num) {
 	int blockNum = 0;
 	if (row < 3) {
 		if (col < 3) {
