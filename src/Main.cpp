@@ -13,16 +13,9 @@
  *  instance of the 2D array we begin with, representing the board. When 
  *  the solution is finished it prints this to the terminal.   
  *
- * References: TODO (update ref-v)
+ * References: 
  *  David Baas and Santiago Quiroga- helped me figure out the 
  *   backtracking portion
-*  learncpp.com - for ascii values
-*  note - my previous cpp class text was learncpp.com
-*  http://www.cplusplus.com/reference/stack/stack/stack/ - stack member functions
-*  DataStructuresAndAlgorithmAnalysisInCpp_2014.pdf page (103 to 108)
-*  Solutions Manual (page 21 to 23)
-*  note: Both of these posted on your GitHub
-*
 ***********************************************************************/
 
 //Includes
@@ -58,21 +51,18 @@ int main(int argc, char** argv) {
 	  std::cout << "Preliminary Success" << std::endl;
 	}
 	
-	//test further here?
+	//Test further here
 	printBoard(board);
-	//while (solved == 0) {
-	//		solved = solve(board);
-	//}
 
 	//Tests
-	int test = blockAvailable(board, 1, 1, 3);
-	std::cout << "This better be 0: " << test << std::endl;
-	test = blockAvailable(board, 1, 4, 3);
-	std::cout << "This better be 1: " << test << std::endl;
-	test = blockAvailable(board, 8, 8, 9);
-	std::cout << "This better be 0: " << test << std::endl;
-	test = blockAvailable(board, 6, 4, 1);
-	std::cout << "This better be 1: " << test << std::endl;
+	//int test = blockAvailable(board, 1, 1, 3);
+	//std::cout << "This better be 0: " << test << std::endl;
+	//test = blockAvailable(board, 1, 4, 3);
+	//std::cout << "This better be 1: " << test << std::endl;
+	//test = blockAvailable(board, 8, 8, 9);
+	//std::cout << "This better be 0: " << test << std::endl;
+	//test = blockAvailable(board, 6, 4, 1);
+	//std::cout << "This better be 1: " << test << std::endl;
 
 	return true;
 }//EoM
