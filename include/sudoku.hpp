@@ -42,8 +42,8 @@ int checkBlock(int board[9][9], int blockNum);
  * This method serves as the driver method for the program, giving main
  * a place to enter. 
  * 
- * @param
- * @return
+ * @param int[9][9] - the board to solve 
+ * @return bool - true if there was sucess, take from call to inner solve
  ***********************************************************************/
 bool solve (int board[9][9]) {
 	return solve(board, 0, 0);
@@ -53,8 +53,9 @@ bool solve (int board[9][9]) {
  * This method is the actual recursive function, holding the true logic
  * of the problem.
  * 
- * @param
- * @return
+ * @param int[9][9] - the board to solve 
+ * @param int row - the row to examine
+ * @return int col - the col to examine
  ***********************************************************************/
 bool solve (int board[9][9], int row, int col) {
   //std::cout << "next step" << std::endl; //Testing**
