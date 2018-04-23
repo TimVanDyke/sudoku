@@ -1,17 +1,116 @@
+
+///Number of allowed character for dev reference (line below)
+//1234567890123456789012345678901234567890123456789012345678901234567890
+/***********************************************************************  
+ * PROJECT 4-2; CIS263-PRJ "Backtracking" (Sudoku)
+ * CIS 263 MWF 1200-1250, Winter 2017
+ * Professor Woodring, Ira
+ * @author Krueger, Cody & Van Dyke, Tim
+ * @version v1.0 22APR2017 18:45
+ *
+ * Description: This is the header file containting the function 
+ *  definitions for all helper functions needed for the sudoku solution 
+ *  primary method. The primary method uses backtracking to solve the 
+ *  puzzle.    
+ *
+ * References: TODO (update ref-v)
+ *  David Baas and Santiago Quiroga- helped me figure out the 
+ *   backtracking portion
+*
+***********************************************************************/
+
+//Includes
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include <string>
 
-int solve (int board[9][9]) {
-	for (int i = 0; i < 9; i++) {
-		for (int j = 0; j < 9; j++) {
-		}
-	}
-	return 1;
+//Function Declarations
+bool solve(int board[9][9]);
+bool solve(int board[9][9], int row, int col);
+int checkRow(int board[9][9], int i);
+int checkCol(int board[9][9], int i);
+bool rowAvailable(int board[9][9], int row, int num);
+int checkBlock(int board[9][9], int blockNum);
+
+bool colAvailable(int board[9][9], int col, int num);
+bool blockAvailable(int board[9][9], int col, int row, int num);
+
+void printBoard (int board[9][9]);
+
+
+/***********************************************************************  
+ * This method serves as the driver method for the program, giving main
+ * a place to enter. 
+ * 
+ * @param
+ * @return
+ ***********************************************************************/
+bool solve (int board[9][9]) {
+	return solve(board, 0, 0);
 }
 
+/***********************************************************************  
+ * This method is the actual recursive function, holding the true logic
+ * of the problem.
+ * 
+ * @param
+ * @return
+ ***********************************************************************/
+bool solve (int board[9][9], int row, int col) {
+  std::cout << "next step" << std::endl;
+  printBoard(board);
+  //Base Case: finished state achieved
+  if (row == 8 && col == 9) {
+    std::cout << "-------FINISHED STATE ACHIEVED-------" << std::endl;
+    printBoard(board);
+    return true;
+  }
+  
+  //Row Return
+  if (col == 9) {
+    ++row;
+    col = 0;
+  }
+  
+  //-----Checking Phase Begins-----
+  //If current position is "empty" search for add
+  if (board[row][col] == 0) {
+    std::cout << "got here" << std::endl;
+    int temp = checkRow(board, row);
+    //int temp = 1;
+    while (temp < 10) {
+      //Check if the temp works for the row, col, and block
+      if (rowAvailable(board, row, temp) && 
+          colAvailable(board, col, temp) && 
+          blockAvailable(board, row, col, temp)) 
+        {
+            //If true (meaning legal), change value
+            board[row][col] = temp;
+            if (solve (board, row, col + 1)) {
+              return true;
+            }
+      }
+      else
+        temp++;
+    }//EoW
+    
+  }
+  //If space is not "empty", continue past it, leaving the value.
+  else {
+    if (solve (board, row, col + 1)) {
+      return true;
+    }
+    else
+      return false;
+  }
+  
+  //Finally if this failed, backtrack
+  // note, how does this react to the numbers given? I imagine this could overwrite them
+  board[row][col] = 0;
+  return false;
+}
 
 //returns the lowest available number in a row
 int checkRow (int board[9][9], int i) {
@@ -45,14 +144,14 @@ int checkCol (int board[9][9], int i) {
 }
 
 //makes sure the num is available for row
-//returns 0 for false, 1 for true
-int rowAvailable(int board[9][9], int row, int num) {
+// depricated: returns 0 for false, 1 for true
+bool rowAvailable(int board[9][9], int row, int num) {
 	for (int i = 0; i < 9; i++) {
 		if (board[row][i] == num) {
-			return 0;
+			return false;
 		}
 	}
-	return 1;
+	return true;
 }
 
 //returns the lowest available number in a block
@@ -94,18 +193,18 @@ int checkBlock (int board[9][9], int blockNum) {
 }
 
 //makes sure the num is available for col
-//returns 0 for false, 1 for true
-int colAvailable(int board[9][9], int col, int num) {
+// depricated: returns 0 for false, 1 for true
+bool colAvailable(int board[9][9], int col, int num) {
 	for (int i = 0; i < 9; i++) {
 		if (board[i][col] == num) {
-			return 0;
+			return false;
 		}
 	}
-	return 1;
+	return true;
 }
 //makes sure the num is available for the square
-//returns 0 for false, 1 for true;
-int blockAvailable(int board[9][9], int col, int row, int num) {
+// depricated: returns 0 for false, 1 for true;
+bool blockAvailable(int board[9][9], int col, int row, int num) {
 	int blockNum = 0;
 	if (row < 3) {
 		if (col < 3) {
@@ -153,11 +252,11 @@ int blockAvailable(int board[9][9], int col, int row, int num) {
 	for ( i = prevI; i < iEnd; i++) {
 		for (j = prevJ; j < jEnd; j++) {
 			if (board[i][j] == num) {
-				return 0;
+				return false;
 			}
 		}
 	}
-	return 1;
+	return true;
 }
 
 void printBoard (int board[9][9]) {
