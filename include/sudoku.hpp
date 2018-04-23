@@ -13,7 +13,7 @@
  *  primary method. The primary method uses backtracking to solve the 
  *  puzzle.    
  *
- * References: TODO (update ref-v)
+ * References: 
  *  David Baas and Santiago Quiroga- helped me figure out the 
  *   backtracking portion
 ***********************************************************************/
@@ -113,6 +113,7 @@ bool solve (int board[9][9], int row, int col) {
   return false;
 }
 
+//THIS METHOD IS UNUSED SO IT IS LEFT UNCOMMENTED
 //returns the lowest available number in a row
 int checkRow (int board[9][9], int i) {
 	int lowest = 1;
@@ -128,7 +129,7 @@ int checkRow (int board[9][9], int i) {
 	return lowest;
 }
 
-
+//THIS METHOD IS UNUSED SO IT IS LEFT UNCOMMENTED
 //returns the lowest available number in a column
 int checkCol (int board[9][9], int i) {
 	int lowest = 1;
@@ -144,8 +145,15 @@ int checkCol (int board[9][9], int i) {
 	return lowest;
 }
 
-//makes sure the num is available for row
-// depricated: returns 0 for false, 1 for true
+/***********************************************************************  
+ * This method makes sure that the number given 'num' is not already 
+ * takin in the row 'row'
+ * 
+ * @param the board
+ * @param int row
+ * @param int num
+ * @return bool
+ ***********************************************************************/
 bool rowAvailable(int board[9][9], int row, int num) {
 	for (int i = 0; i < 9; i++) {
 		if (board[row][i] == num) {
@@ -155,6 +163,7 @@ bool rowAvailable(int board[9][9], int row, int num) {
 	return true;
 }
 
+//THIS METHOD IS UNUSED SO IT IS LEFT UNCOMMENTED
 //returns the lowest available number in a block
 //use 0 through 8 to reference the blocks
 //0, 1, 2,   this is the structure
@@ -193,8 +202,15 @@ int checkBlock (int board[9][9], int blockNum) {
 	return lowest;
 }
 
-//makes sure the num is available for col
-// depricated: returns 0 for false, 1 for true
+/***********************************************************************  
+ * This method makes sure that the number given 'num' is not already 
+ * takin in the col 'col'
+ * 
+ * @param the board
+ * @param int col
+ * @param int num
+ * @return bool
+ ***********************************************************************/
 bool colAvailable(int board[9][9], int col, int num) {
 	for (int i = 0; i < 9; i++) {
 		if (board[i][col] == num) {
@@ -203,8 +219,16 @@ bool colAvailable(int board[9][9], int col, int num) {
 	}
 	return true;
 }
-//makes sure the num is available for the square
-// depricated: returns 0 for false, 1 for true;
+/***********************************************************************  
+ * This method makes sure that the number given 'num' is not already 
+ * takin in the block based around 'row' and 'col'
+ * 
+ * @param the board
+ * @param int row
+ * @param int col
+ * @param int num
+ * @return bool
+ ***********************************************************************/
 bool blockAvailable(int board[9][9], int row, int col, int num) {
 	int blockNum = 0;
 	if (row < 3) {
@@ -260,6 +284,11 @@ bool blockAvailable(int board[9][9], int row, int col, int num) {
 	return true;
 }
 
+/***********************************************************************  
+ * This method prints out the board in a nice format to look at
+ * 
+ * @param the board
+ ***********************************************************************/
 void printBoard (int board[9][9]) {
 	for (int i = 0; i < 9; i++) {
 		for (int j = 0; j < 9; j++) {
