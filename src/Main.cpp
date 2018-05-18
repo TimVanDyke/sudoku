@@ -51,18 +51,5 @@ int main(int argc, char** argv) {
 	  std::cout << "Preliminary Success" << std::endl;
 	}
 	
-	//Test further here
-	printBoard(board);
-
-	//Tests
-	//int test = blockAvailable(board, 1, 1, 3);
-	//std::cout << "This better be 0: " << test << std::endl;
-	//test = blockAvailable(board, 1, 4, 3);
-	//std::cout << "This better be 1: " << test << std::endl;
-	//test = blockAvailable(board, 8, 8, 9);
-	//std::cout << "This better be 0: " << test << std::endl;
-	//test = blockAvailable(board, 6, 4, 1);
-	//std::cout << "This better be 1: " << test << std::endl;
-
-	return true;
+	return 0;
 }//EoM
